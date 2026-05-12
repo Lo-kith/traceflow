@@ -52,6 +52,7 @@ export const traceflowMiddleware = async (
 
       request: {
         method: req.method,
+        // og url la query params irundha athu kooda capture panrom
         url: req.originalUrl,
         query: req.query,
         body: req.body,
