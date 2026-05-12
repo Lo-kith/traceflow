@@ -1,8 +1,11 @@
 {
-  "name": "traceflow",
+  "name": "traceflow-monitor",
   "version": "1.0.0",
   "main": "dist/index.js",
   "type": "module",
+   "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
