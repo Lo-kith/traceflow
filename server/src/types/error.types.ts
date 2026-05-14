@@ -23,7 +23,7 @@ export interface IErrorPayload{
      device:{
         browser:string;
         browserVersion:string;
-        od?:string;
+        os?:string;
         deviceType?:string;
         cpu?:string;
      };
@@ -33,7 +33,7 @@ export interface IErrorPayload{
         
      };
 
-     perfomance:{
+     performance:{
         responseTime:number;
      };
 

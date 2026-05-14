@@ -14,7 +14,9 @@ export const traceflowMiddleware = async (
   try {
     // Used for response performance tracking.
 //  like API took 120ms intha maari details track panna use panrom
-    const start = Date.now();
+   const responseTime =
+  Date.now() -
+  (req.traceflowStart || Date.now());
 
 
     // Mozilla/5.0 (Linux; Android 13)
@@ -85,7 +87,7 @@ export const traceflowMiddleware = async (
       },
 
       performance: {
-        responseTime: Date.now() - start
+        responseTime: responseTime
       }
     };
 
