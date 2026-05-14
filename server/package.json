@@ -1,28 +1,22 @@
 {
   "name": "traceflow-monitor",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "type": "module",
-
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-
   "files": [
     "dist"
   ],
-
   "exports": {
-    ".": "./dist/index.js"
+    ".": "./dist/register.js"
   },
-
   "publishConfig": {
     "access": "public"
   },
-
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc"
   },
-
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
@@ -30,7 +24,6 @@
     "mongoose": "^8.15.1",
     "ua-parser-js": "^1.0.39"
   },
-
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",

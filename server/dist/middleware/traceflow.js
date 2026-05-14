@@ -5,7 +5,8 @@ export const traceflowMiddleware = async (err, req, res, next) => {
     try {
         // Used for response performance tracking.
         //  like API took 120ms intha maari details track panna use panrom
-        const start = Date.now();
+        const responseTime = Date.now() -
+            (req.traceflowStart || Date.now());
         // Mozilla/5.0 (Linux; Android 13)
         const parser = new UAParser(req.headers["user-agent"]);
         //   Converts raw user-agent into structured data.
@@ -30,6 +31,7 @@ export const traceflowMiddleware = async (err, req, res, next) => {
             },
             request: {
                 method: req.method,
+                // og url la query params irundha athu kooda capture panrom
                 url: req.originalUrl,
                 query: req.query,
                 body: req.body,
@@ -54,7 +56,7 @@ export const traceflowMiddleware = async (err, req, res, next) => {
                 statusCode: res.statusCode
             },
             performance: {
-                responseTime: Date.now() - start
+                responseTime: responseTime
             }
         };
         await ErrorLog.create(errorData);
