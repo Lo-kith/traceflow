@@ -4,16 +4,16 @@ Production-ready Express.js error tracking and request monitoring middleware.
 
 TraceFlow automatically captures:
 
-- API crashes
-- Request details
-- Headers
-- Device & browser info
-- Response time
-- Stack traces
-- User IP
-- Query params
-- Route params
-- Request body
+* API crashes
+* Request details
+* Headers
+* Device & browser info
+* Response time
+* Stack traces
+* User IP
+* Query params
+* Route params
+* Request body
 
 and stores them directly into MongoDB.
 
@@ -21,29 +21,46 @@ and stores them directly into MongoDB.
 
 # Installation
 
-```bash
+bash
 npm install traceflow-monitor
 
-Required Dependencies:
 
+Required dependencies:
+
+bash
 npm install express mongoose dotenv
 
 
-Setup
+---
 
-1. Create .env
-MONGO_URI=mongodb://localhost:27017/traceflow
+# Setup
+
+## 1. Create `.env`
+
+env
+MONGO_URI=
 PORT=3000
 
 
-2. Connect MongoDB
+---
+
+## 2. Connect MongoDB
+
+js
 import mongoose from "mongoose";
 
 mongoose.connect(
-  process.env.MONGO_URI as string
+  process.env.MONGO_URI
 );
-Usage
-Basic Example
+
+
+---
+
+# Usage
+
+## Basic Example
+
+js
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
@@ -59,10 +76,8 @@ const app = express();
 app.use(express.json());
 
 mongoose.connect(
-  process.env.MONGO_URI as string
+  process.env.MONGO_URI
 );
-
-
 
 // TEST ROUTE
 app.get("/error", () => {
@@ -73,12 +88,8 @@ app.get("/error", () => {
 
 });
 
-
-
 // TRACEFLOW LOGGER
 app.use(traceflowMiddleware);
-
-
 
 // FINAL ERROR HANDLER
 app.use((err, req, res, next) => {
@@ -90,8 +101,6 @@ app.use((err, req, res, next) => {
 
 });
 
-
-
 app.listen(3000, () => {
 
   console.log(
@@ -99,46 +108,68 @@ app.listen(3000, () => {
   );
 
 });
-Middleware Order ⚠️
+
+---
+
+# Middleware Order ⚠️
 
 TraceFlow must be placed AFTER routes.
 
-✅ Correct
+## ✅ Correct
 
+js
 app.use("/api", routes);
 
 app.use(traceflowMiddleware);
 
-❌ Wrong
 
+## ❌ Wrong
+js
 app.use(traceflowMiddleware);
 
 app.use("/api", routes);
-What Gets Logged
-Request Data
-HTTP Method
-URL
-Query Params
-Route Params
-Request Body
-User Data
-IP Address
-Authorization Token (masked)
-Device Data
-Browser
-Browser Version
-OS
-Device Type
-CPU Architecture
-Error Data
-Error Message
-Stack Trace
-Performance Data
-Response Time
-Status Code
 
 
-Example Logged Data
+---
+
+# What Gets Logged
+
+## Request Data
+
+* HTTP Method
+* URL
+* Query Params
+* Route Params
+* Request Body
+
+## User Data
+
+* IP Address
+* Authorization Token (masked)
+
+## Device Data
+
+* Browser
+* Browser Version
+* OS
+* Device Type
+* CPU Architecture
+
+## Error Data
+
+* Error Message
+* Stack Trace
+
+## Performance Data
+
+* Response Time
+* Status Code
+
+---
+
+# Example Logged Data
+
+json
 {
   "error": {
     "message": "Production Crash Simulation",
@@ -172,3 +203,10 @@ Example Logged Data
     "responseTime": 120
   }
 }
+
+
+---
+
+# Author
+
+Lokith 🚀
